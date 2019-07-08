@@ -23,7 +23,7 @@ fi
 openssl enc -aes-256-cbc -d -in $INPATH -out $OUTPATH
 STATUS=$?
 
-if [[ STATUS -ne 0 ]] ; then
+if [[ $STATUS -ne 0 ]] ; then
     echo "Something went wrong decrypting the file"
     rm $OUTPATH
     exit 1
