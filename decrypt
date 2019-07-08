@@ -20,7 +20,7 @@ if [[ -f "$OUTPATH" ]] ; then
     exit 1
 fi
 
-openssl enc -aes-256-cbc -d -in "$INPATH" -out "$OUTPATH"
+openssl enc -aes-256-cbc -d -iter 1000000 -in "$INPATH" -out "$OUTPATH"
 STATUS=$?
 
 if [[ $STATUS -ne 0 ]] ; then
