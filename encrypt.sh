@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $# -ne 1 ]] ; then
+    echo "Usage: encrypt path/to/file.txt"
+    exit 1
+fi
+
+POSTFIX=".enc"
+INPATH=$1
+OUTPATH="$INPATH$POSTFIX"
+
+openssl enc -aes-256-cbc -e -in $INPATH -out $OUTPATH
+
+if [[ ! -f $OUTPATH ]] ; then
+    echo "Something went wrong encrypting the file"
+    exit 1
+fi
+
+rm $INPATH
