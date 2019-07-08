@@ -6,14 +6,14 @@ if [[ $# -ne 1 ]] ; then
 fi
 
 POSTFIX=".enc"
-INPATH=$1
+INPATH="$1"
 OUTPATH="$INPATH$POSTFIX"
 
-openssl enc -aes-256-cbc -e -in $INPATH -out $OUTPATH
+openssl enc -aes-256-cbc -e -in "$INPATH" -out "$OUTPATH"
 
-if [[ ! -f $OUTPATH ]] ; then
+if [[ ! -f "$OUTPATH" ]] ; then
     echo "Something went wrong encrypting the file"
     exit 1
 fi
 
-rm $INPATH
+rm "$INPATH"

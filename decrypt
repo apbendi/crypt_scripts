@@ -6,32 +6,32 @@ if [[ $# -ne 1 ]] ; then
 fi
 
 POSTFIX=".enc"
-INPATH=$1
+INPATH="$1"
 
-if [[ ! $INPATH =~ ^.+\.enc$ ]] ; then
+if [[ ! "$INPATH" =~ ^.+\.enc$ ]] ; then
     echo "Input file does not end with expect extension: $POSTFIX"
     exit 1
 fi
 
-OUTPATH=${INPATH%.enc}
+OUTPATH="${INPATH%.enc}"
 
-if [[ -f $OUTPATH ]] ; then
+if [[ -f "$OUTPATH" ]] ; then
     echo "A file already exists at: $OUTPATH"
     exit 1
 fi
 
-openssl enc -aes-256-cbc -d -in $INPATH -out $OUTPATH
+openssl enc -aes-256-cbc -d -in "$INPATH" -out "$OUTPATH"
 STATUS=$?
 
 if [[ $STATUS -ne 0 ]] ; then
     echo "Something went wrong decrypting the file"
-    rm $OUTPATH
+    rm "$OUTPATH"
     exit 1
 fi
 
-if [[ ! -f $OUTPATH ]] ; then
+if [[ ! -f "$OUTPATH" ]] ; then
     echo "Something went wrong decrypting the file..."
     exit 1
 fi
 
-rm $INPATH
+rm "$INPATH"
